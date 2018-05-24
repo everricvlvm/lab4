@@ -85,7 +85,7 @@
 
 У меня данная команда выглядит так:
 
-.. figure:: https://github.com/everricvlvm/lab4/blob/master/_static/5.PNG?raw=true
+.. figure:: https://github.com/everricvlvm/lab4/blob/master/source/_static/5.PNG?raw=true
        :scale: 100 %
        :align: center
 
