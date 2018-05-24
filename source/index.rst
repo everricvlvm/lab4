@@ -40,21 +40,13 @@
 	scp -r -P 6666 student@openit.guap.ru:/container/ABC-Linux/lab4/* work/
 	cd work
 
-Теперь, после изучения полученных файлов, стало понятно, что Makefile имеет стандартную ошибку для системы make, а именно -- пробелы вместо табуляции перед командами. А оснавная логическая ошибка в lab4.c, : 
-
-.. figure:: https://github.com/Yohitman/labs/blob/master/_static/1.PNG?raw=true
-       :scale: 100 %
-       :align: center
-
-       Вот как неправильно
-	   
-	   (слово ошибка намекает)
+Теперь, после изучения полученных файлов, стало понятно, что Makefile имеет стандартную ошибку для системы make, а именно -- пробелы вместо табуляции перед командами. А оснавная логическая ошибка в lab4.c. 
 
 Она представляет собой моментальное сравнение системного вызова fork() с числом вместо сравнения переменной, 
 которой присвоено значение этого вызова
 Эту ошибку можно и нужно исправить следующим образом:
 
-.. figure:: https://github.com/Yohitman/labs/blob/master/_static/2.PNG?raw=true
+.. figure:: https://github.com/everricvlvm/lab4/blob/master/source/_static/2.PNG?raw=true
        :scale: 100 %
        :align: center
 
@@ -73,7 +65,7 @@
 
 Было принято решение в родительском процессе использовать команду sleep():
 
-.. figure:: https://github.com/everricvlvm/lab4/source/_static/3.PNG?raw=true
+.. figure:: https://github.com/everricvlvm/lab4/blob/master/source/_static/3.PNG?raw=true
        :scale: 100 %
        :align: center
 
@@ -81,7 +73,7 @@
 
 Итак, программа работает, осталось лишь собрать ее из нашего Makefile:
 
-.. figure:: https://github.com/Yohitman/labs/blob/master/_static/4.PNG?raw=true
+.. figure:: https://github.com/everricvlvm/lab4/blob/master/source/_static/4.PNG?raw=true
        :scale: 100 %
        :align: center
 
@@ -93,7 +85,7 @@
 		
 И запускаем нашу программу из папки bin:
 
-.. figure:: https://github.com/Yohitman/labs/blob/master/_static/5.PNG?raw=true
+.. figure:: https://github.com/everricvlvm/lab4/blob/master/source/_static/5.PNG?raw=true
        :scale: 100 %
        :align: center
 
@@ -109,7 +101,7 @@
 
 Для меня данная команда выглядит так:
 
-.. figure:: https://github.com/Yohitman/labs/blob/master/_static/6.PNG?raw=true
+.. figure:: https://github.com/everricvlvm/labs/blob/master/_static/6.PNG?raw=true
        :scale: 100 %
        :align: center
 
