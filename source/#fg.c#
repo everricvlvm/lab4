@@ -1,0 +1,34 @@
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdio.h>
+
+#include "lab4.h"
+
+int main()
+{
+    pid_t pid, ppid, child = fork();
+    int a = 0, b = 100;
+
+    pid = getpid();
+    ppid = getppid();
+
+    if(child < 0){
+      return 1; /* ошибка */
+    } else if (child == 0){
+    /* ребенок */
+      a = DO_A(a);
+    /* Печатаем значения PID, PPID и вычислен-
+       ное значение переменной a,b (в каждом из
+       процессов) */
+      printf("child: My pid = %d, my ppid = %d,result a = %d,result b = %d\n",(int)pid,(int)ppid,a,b);
+    } else {
+    /* родитель */
+      sleep(1);
+      b = DO_B(b);
+    /* Печатаем значения PID, PPID и вычислен-
+       ное значение переменной a,b (в каждом из
+       процессов) */
+      printf("parent: My pid = %d, my ppid = %d,result a = %d,result b = %d\n",(int)pid,(int)ppid,a,b);
+    }
+    return 0;
+}
