@@ -24,6 +24,7 @@ Dockerfile
 
 .. highlight:: dockerfile
 
+::
    FROM alpine
    RUN apk update && apk upgrade && apk add nano make gcc build-base
    RUN mkdir work && cd work
@@ -35,6 +36,8 @@ Shall-script
 ------------
 
 .. highlight:: bash
+
+::
    ls
 
 Исходный код lab5.c
@@ -42,6 +45,7 @@ Shall-script
 
 .. highlight:: c
 
+::
    #include <stdio.h>
    #include <unistd.h>
    #include <fcntl.h>
@@ -78,6 +82,7 @@ Shall-script
 
 .. highlight:: makefile
 
+::
    build:
 	       gcc lab5.c -o lab5
    clean:
@@ -93,6 +98,7 @@ Shall-script
 
 .. highlight:: bash
 
+::
   ###arguments###
   
   qwe
@@ -145,8 +151,9 @@ Shall-script
   _=./lb5
 
 Образ
-=====
+^^^^^
 
+.. Расположение::
 ::
    docker run -it everricvlvm/lb5
 
@@ -156,7 +163,7 @@ Shall-script
 	cd work
 
 	   
-Выводы 
+Выводы
 ^^^^^^
 
 Мною были изучены средства удалённого документирования и было опробовано взаимодействие облачных служб. Также я ознакомился с некоторыми системными вызовами, аргументами и переменными окружения программы.
