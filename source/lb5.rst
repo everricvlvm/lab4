@@ -3,102 +3,155 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Работа №4. Системные вызовы, процессы, компиляция программ
-==========================================================
+Работа №5. Переменные окружения и файловые операции.
+====================================================
 
-Цели
-^^^^
-1) Приобретение навыков по управлению процессами.
-2) Изучение системного вызова fork().
-3) Приобретение навыков написания и трансляции системного ПО на языке C.
-4) Изучение утилиты make и её использование для трансляции программ на языке C.
-5) Использование удалённых серверов для трансляции приложений.
-6) Изучение Docker и базового взаимодействия с ним.
-7) Изучение способов нестандартного представления информации.
+Цели работы
+^^^^^^^^^^^
+Изучение системных вызовов для работы с файлами и переменными окружения.
 
-Работа
-^^^^^^
+Содержание работы
+^^^^^^^^^^^^^^^^^
 
-Начало работы было положено выбором основной платформы для Docker, коей стала -- Alpine, будучи выбранной из предложенных преподавателем: RancherOS, Ubuntu и Alpine. Главным критерием данного выбора оказался компактный размер этой системы, а также интерес к неизведанному. ::
+1) Написать программу, сохраняющею значения аргументов командной строки и параметров окружающей среды в файл lab5.txt.
+2) Написать Makefile, обеспечивающий трансляцию, установку, очистку и удаление программы.
 
-    docker run -it alpine:latest
+Ход работы
+==========
 
-.. Работа происходила на особой версии хоста kali для vbox, где был только root-пользователь.
+Dockerfile
+----------
+.. highlight:: dockerfile
 
-Далее производится начальная настройка системы.
-Обновление::
+   FROM alpine
+   RUN apk update && apk upgrade && apk add nano make gcc build-base
+   RUN mkdir work && cd work
+   COPY lab5.c 
+   COPY Makefile
+   CMD sh script.sh
 
-    apk update && apk upgrade
-	
-Установка рабочих программ::
+Shall-script
+------------
+.. highlight:: bash
+   ls
 
-    apk add nano make gcc build-base openssh
+Исходный код lab5.c
+--------------
+.. highlight:: c
 
-Создание каталога work и скачивание в него рабочих файлов::
+   #include <stdio.h>
+   #include <unistd.h>
+   #include <fcntl.h>
+   #include <sys/types.h>
 
-	mkdir work
+   int main(int argc, char* argv[], char* envp[])
+   {
+	       int fd = open("lb5.txt", O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	       write(fd, &"###arguments###\n\n", 17);
+	       printf("###arguments###\n\n");
+	       for (int i = 1; i<argc; i++)
+	       {
+	         write(fd, argv[i], strlen(argv[i]));
+		 write(fd, &"\n", 1);
+		 printf("%s\n", argv[i]);
+	       }
+
+	       write(fd, &"###enviroment###\n\n", 18);
+	       printf("###enviroment###\n\n");
+
+	       for(char** temp = envp; *(temp) != NULL; temp++)
+	       {
+	         write(fd, *temp, strlen(*temp));
+		 write(fd, &"\n", 1);
+		 printf("%s\n", *temp);
+	       }
+  
+	       close(fd);
+	       return 0;
+   }
+
+Исходный код Makefile
+---------------------
+.. highlight:: makefile
+
+   build:
+	       gcc lab5.c -o lab5
+   clean:
+	       rm -f lab5 lab5.o
+   install:
+	       cp lab5 /bin/lab5
+   uninstall:
+	       rm -f /bin/lab5
+
+	       
+Содержимое файла lab5.txt ("./lb5 qwe asd zxc")
+-----------------------------------------------
+
+  ###arguments###
+  
+  qwe
+  asd
+  zxc
+
+  ###enviroment###
+  
+  LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:c$
+  XDG_MENU_PREFIX=gnome-
+  LANG=en_US.UTF-8
+  GDM_LANG=en_US.UTF-8
+  DISPLAY=:1
+  COLORTERM=truecolor
+  USERNAME=root
+  XDG_VTNR=2
+  SSH_AUTH_SOCK=/run/user/0/keyring/ssh
+  S_COLORS=auto
+  XDG_SESSION_ID=3
+  USER=root
+  DESKTOP_SESSION=gnome
+  GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/4f179ed8_45a7_4eb3_8742_484929$
+  PWD=/root/labs
+  HOME=/root
+  SSH_AGENT_PID=1204
+  QT_ACCESSIBILITY=1
+  XDG_SESSION_TYPE=x11
+  XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/
+  XDG_SESSION_DESKTOP=gnome
+  GJS_DEBUG_OUTPUT=stderr
+  TK_MODULES=gail:atk-bridge
+  WINDOWPATH=2
+  TERM=xterm-256color
+  SHELL=/bin/bash
+  VTE_VERSION=5200
+  XDG_CURRENT_DESKTOP=GNOME
+  GPG_AGENT_INFO=/run/user/0/gnupg/S.gpg-agent:0:1
+  GNOME_TERMINAL_SERVICE=:1.67
+  SHLVL=1
+  XDG_SEAT=seat0
+  GDMSESSION=gnome
+  GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+  LOGNAME=root
+  DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/bus
+  XDG_RUNTIME_DIR=/run/user/0
+  XAUTHORITY=/run/user/0/gdm/Xauthority
+  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+  GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+  SESSION_MANAGER=local/kali:@/tmp/.ICE-unix/1109,unix/kali:/tmp/.ICE-unix/1109
+  _=./lb5
+
+Образ
+=====::
+  docker run -it everricvlvm/lb5
+
+  
+..	mkdir work
 	scp -r -P 6666 student@openit.guap.ru:/container/ABC-Linux/lab4/* work/
 	cd work
 
-Теперь, после изучения полученных файлов, стало понятно, что Makefile имеет частую ошибку для системы make, а именно -- пробелы вместо табуляции перед командами.
-
-Оснавная же логическая ошибка содержится в lab4.c. 
-
-Она представляет собой сравнение результата функции с побочным эффектом fork() с числом вместо использования временной переменной, которой присвоено значение этого вызова.
-Эту ошибку можно и нужно исправить следующим образом:
-
-.. figure:: https://github.com/everricvlvm/lab4/blob/master/source/_static/2.PNG?raw=true
-       :scale: 100 %
-       :align: center
-
-       Теперь верно. 
-
-Для синхронизации работы двух процессов, было решено в родительском процессе использовать команду sleep():
-
-.. figure:: https://github.com/everricvlvm/lab4/blob/master/source/_static/3.PNG?raw=true
-       :scale: 100 %
-       :align: center
-
-       Теперь родительский процесс дожидается запуска дочернего.
-
-Итак, осталось лишь собрать ее из нашего Makefile.
-
-Выполняем команды ::
-
-		make && make install && make clean
-		
-И запускаем программу из папки bin:
-
-.. figure:: https://github.com/everricvlvm/lab4/blob/master/source/_static/4.PNG?raw=true
-       :scale: 100 %
-       :align: center
-
-       Вывод программы.
-	   
-Сохраняем образ -- для этого переходим в другой терминал и сначала ищем рабочий контейнер::
-
-	docker ps
-
-В колонке ContainerID уникальное имя контейнера, вводим его в команде ::
- 
-	docker commit *имя контейнера* *имя целевого каталога*
-
-У меня данная команда выглядит так:
-
-.. figure:: https://github.com/everricvlvm/lab4/blob/master/source/_static/5.PNG?raw=true
-       :scale: 100 %
-       :align: center
-
-       Сохранение Docker-контейнера.
-	   
-Получить и проверить итоговый контейнер можно по команде::
-
-	docker run -it everricvlvm/lb4
 	   
 Выводы 
 ^^^^^^
 
-Были исследованы процессы, системный вызов fork(), работа с Docker. Изучено взаимодействие удалённых сервисов меж собой, и как итог произведён данный отчёт на основе сетевых методик.
+Мною были изучены средства удалённого документирования и было опробовано взаимодействие облачных служб. Также я ознакомился с некоторыми системными вызовами, аргументами и переменными окружения программы.
 	   
 .. toctree::
    :maxdepth: 2
