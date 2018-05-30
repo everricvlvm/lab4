@@ -41,7 +41,7 @@ Shall-script
 Исходный код lab5.c
 ~~~~~~~~~~~~~~~~~~~
 
-.. highlight:: c
+.. code-block:: c
    ::
       #include <stdio.h>
       #include <unistd.h>
