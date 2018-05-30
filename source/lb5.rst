@@ -17,10 +17,11 @@
 2) Написать Makefile, обеспечивающий трансляцию, установку, очистку и удаление программы.
 
 Ход работы
-==========
+^^^^^^^^^^
 
 Dockerfile
 ----------
+
 .. highlight:: dockerfile
 
    FROM alpine
@@ -32,11 +33,13 @@ Dockerfile
 
 Shall-script
 ------------
+
 .. highlight:: bash
    ls
 
 Исходный код lab5.c
---------------
+-------------------
+
 .. highlight:: c
 
    #include <stdio.h>
@@ -72,6 +75,7 @@ Shall-script
 
 Исходный код Makefile
 ---------------------
+
 .. highlight:: makefile
 
    build:
@@ -86,6 +90,8 @@ Shall-script
 	       
 Содержимое файла lab5.txt ("./lb5 qwe asd zxc")
 -----------------------------------------------
+
+.. highlight:: bash
 
   ###arguments###
   
@@ -139,8 +145,10 @@ Shall-script
   _=./lb5
 
 Образ
-=====::
-  docker run -it everricvlvm/lb5
+=====
+
+::
+   docker run -it everricvlvm/lb5
 
   
 ..	mkdir work
