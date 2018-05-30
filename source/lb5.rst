@@ -22,7 +22,7 @@
 Dockerfile
 ~~~~~~~~~~
 
-  .. highlight:: dockerfile
+  .. code-block:: dockerfile
    
       FROM alpine
       RUN apk update && apk upgrade && apk add nano make gcc build-base
@@ -39,16 +39,16 @@ Dockerfile
 Shall-script
 ~~~~~~~~~~~~
 
-  .. highlight:: bash
-    :text: 
+  .. code-block:: bash
+     
       cd /work
       make build
       make install
       make clean
       lab5 qwe asd zxc
 
-Исходный код lab5.c
-~~~~~~~~~~~~~~~~~~~
+Исходный код - lab5.c
+~~~~~~~~~~~~~~~~~~~~~
 
   .. code-block:: c
 
@@ -83,10 +83,10 @@ Shall-script
 	       return 0;
       }
 
-Исходный код Makefile
-~~~~~~~~~~~~~~~~~~~~~
+Исходный код - Makefile
+~~~~~~~~~~~~~~~~~~~~~~~
 
-  .. highlight:: makefile
+  .. code-block:: makefile
   
       build:
 	       gcc lab5.c -o lab5
@@ -98,10 +98,10 @@ Shall-script
 	       rm -f /bin/lab5
 
 	       
-Содержимое файла lab5.txt ("./lb5 qwe asd zxc")
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Содержимое файла lab5.txt ("lab5 qwe asd zxc")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  .. highlight:: bash
+  .. code-block:: bash
   
       ###arguments###
       
@@ -152,14 +152,14 @@ Shall-script
       PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
       GJS_DEBUG_TOPICS=JS ERROR;JS LOG
       SESSION_MANAGER=local/kali:@/tmp/.ICE-unix/1109,unix/kali:/tmp/.ICE-unix/1109
-      _=./lb5
+      _=./lab5
 
 Образ
 -----
 
   .. Расположение::
    
-      docker run -it everricvlvm/lb5
+      docker run -it everricvlvm/lab5
 	   
 Выводы
 ------
@@ -167,7 +167,7 @@ Shall-script
 Мною были изучены средства удалённого документирования и было опробовано взаимодействие облачных служб. Также я ознакомился с некоторыми системными вызовами, аргументами и переменными окружения программы.
 	   
 .. toctree::
-   :maxdepth: 17
+   :maxdepth: 2
    :caption: Contents:
 
 
