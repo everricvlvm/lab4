@@ -22,6 +22,8 @@
 Dockerfile
 ~~~~~~~~~~
 
+Фаил сборки проекта в докер-образ:
+
   .. code-block:: dockerfile
    
       FROM alpine
@@ -36,7 +38,7 @@ Dockerfile
       CMD sh /work/script.sh
 
 
-Shall-script
+Shell-script
 ~~~~~~~~~~~~
 
   .. code-block:: bash
@@ -86,6 +88,8 @@ Shall-script
 Исходный код - Makefile
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+Фаил для упровления программой:
+
   .. code-block:: makefile
   
       build:
@@ -100,6 +104,8 @@ Shall-script
 	       
 Содержимое файла lab5.txt ("lab5 qwe asd zxc")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Требуемый вывод программы:
 
   .. code-block:: bash
   
@@ -157,7 +163,9 @@ Shall-script
 Образ
 -----
 
-  .. Расположение::
+Подготовленный образ для работы с ним через hub.docker.io:
+
+  .. code-block:: bash
    
       docker run -it everricvlvm/lab5
 	   
