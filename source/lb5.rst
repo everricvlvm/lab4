@@ -22,8 +22,8 @@
 Dockerfile
 ~~~~~~~~~~
 
-.. highlight:: dockerfile
-   ::
+  .. highlight:: dockerfile
+   
       FROM alpine
       RUN apk update && apk upgrade && apk add nano make gcc build-base
       RUN mkdir work && cd work
@@ -34,16 +34,19 @@ Dockerfile
 Shall-script
 ~~~~~~~~~~~~
 
-.. highlight:: bash
-   ::
-      ls
+  .. highlight:: bash
+   
+      cd /work
+      make build
+      make install
+      make clean
+      ./bin/lab5
 
 Исходный код lab5.c
 ~~~~~~~~~~~~~~~~~~~
 
   .. code-block:: c
 
-    ::
       #include <stdio.h>
       #include <unistd.h>
       #include <fcntl.h>
@@ -78,8 +81,8 @@ Shall-script
 Исходный код Makefile
 ~~~~~~~~~~~~~~~~~~~~~
 
-.. highlight:: makefile
-   ::
+  .. highlight:: makefile
+  
       build:
 	       gcc lab5.c -o lab5
       clean:
@@ -93,8 +96,8 @@ Shall-script
 Содержимое файла lab5.txt ("./lb5 qwe asd zxc")
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. highlight:: bash
-   ::
+  .. highlight:: bash
+  
       ###arguments###
       
       qwe
@@ -149,8 +152,8 @@ Shall-script
 Образ
 -----
 
-.. Расположение::
-   ::
+  .. Расположение::
+   
       docker run -it everricvlvm/lb5
 
   
