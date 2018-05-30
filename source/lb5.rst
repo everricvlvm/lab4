@@ -27,20 +27,25 @@ Dockerfile
       FROM alpine
       RUN apk update && apk upgrade && apk add nano make gcc build-base
       RUN mkdir work && cd work
-      COPY lab5.c 
-      COPY Makefile
-      CMD sh script.sh
+      COPY lab5.c /workCOPY lab5.c /work
+      COPY Makefile /work
+      COPY script.sh /work
+      RUN cd /work && make build
+      RUN cd /work && make install
+      RUN cd /work && make clean
+      CMD sh /work/script.sh
+
 
 Shall-script
 ~~~~~~~~~~~~
 
   .. highlight:: bash
-   
+    :text: 
       cd /work
       make build
       make install
       make clean
-      ./bin/lab5
+      lab5 qwe asd zxc
 
 Исходный код lab5.c
 ~~~~~~~~~~~~~~~~~~~
@@ -155,12 +160,6 @@ Shall-script
   .. Расположение::
    
       docker run -it everricvlvm/lb5
-
-  
-..	mkdir work
-	scp -r -P 6666 student@openit.guap.ru:/container/ABC-Linux/lab4/* work/
-	cd work
-
 	   
 Выводы
 ------
