@@ -23,36 +23,33 @@ Dockerfile
 ----------
 
 .. highlight:: dockerfile
-
-::
-   FROM alpine
-   RUN apk update && apk upgrade && apk add nano make gcc build-base
-   RUN mkdir work && cd work
-   COPY lab5.c 
-   COPY Makefile
-   CMD sh script.sh
+   ::
+      FROM alpine
+      RUN apk update && apk upgrade && apk add nano make gcc build-base
+      RUN mkdir work && cd work
+      COPY lab5.c 
+      COPY Makefile
+      CMD sh script.sh
 
 Shall-script
 ------------
 
 .. highlight:: bash
-
-::
-   ls
+   ::
+      ls
 
 Исходный код lab5.c
 -------------------
 
 .. highlight:: c
-
-::
-   #include <stdio.h>
-   #include <unistd.h>
-   #include <fcntl.h>
-   #include <sys/types.h>
-
-   int main(int argc, char* argv[], char* envp[])
-   {
+   ::
+      #include <stdio.h>
+      #include <unistd.h>
+      #include <fcntl.h>
+      #include <sys/types.h>
+      
+      int main(int argc, char* argv[], char* envp[])
+      {
 	       int fd = open("lb5.txt", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	       write(fd, &"###arguments###\n\n", 17);
 	       printf("###arguments###\n\n");
@@ -75,21 +72,20 @@ Shall-script
   
 	       close(fd);
 	       return 0;
-   }
+      }
 
 Исходный код Makefile
 ---------------------
 
 .. highlight:: makefile
-
-::
-   build:
+   ::
+      build:
 	       gcc lab5.c -o lab5
-   clean:
+      clean:
 	       rm -f lab5 lab5.o
-   install:
+      install:
 	       cp lab5 /bin/lab5
-   uninstall:
+      uninstall:
 	       rm -f /bin/lab5
 
 	       
@@ -97,65 +93,64 @@ Shall-script
 -----------------------------------------------
 
 .. highlight:: bash
+   ::
+      ###arguments###
+      
+      qwe
+      asd
+      zxc
 
-::
-  ###arguments###
-  
-  qwe
-  asd
-  zxc
-
-  ###enviroment###
-  
-  LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:c$
-  XDG_MENU_PREFIX=gnome-
-  LANG=en_US.UTF-8
-  GDM_LANG=en_US.UTF-8
-  DISPLAY=:1
-  COLORTERM=truecolor
-  USERNAME=root
-  XDG_VTNR=2
-  SSH_AUTH_SOCK=/run/user/0/keyring/ssh
-  S_COLORS=auto
-  XDG_SESSION_ID=3
-  USER=root
-  DESKTOP_SESSION=gnome
-  GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/4f179ed8_45a7_4eb3_8742_484929$
-  PWD=/root/labs
-  HOME=/root
-  SSH_AGENT_PID=1204
-  QT_ACCESSIBILITY=1
-  XDG_SESSION_TYPE=x11
-  XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/
-  XDG_SESSION_DESKTOP=gnome
-  GJS_DEBUG_OUTPUT=stderr
-  TK_MODULES=gail:atk-bridge
-  WINDOWPATH=2
-  TERM=xterm-256color
-  SHELL=/bin/bash
-  VTE_VERSION=5200
-  XDG_CURRENT_DESKTOP=GNOME
-  GPG_AGENT_INFO=/run/user/0/gnupg/S.gpg-agent:0:1
-  GNOME_TERMINAL_SERVICE=:1.67
-  SHLVL=1
-  XDG_SEAT=seat0
-  GDMSESSION=gnome
-  GNOME_DESKTOP_SESSION_ID=this-is-deprecated
-  LOGNAME=root
-  DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/bus
-  XDG_RUNTIME_DIR=/run/user/0
-  XAUTHORITY=/run/user/0/gdm/Xauthority
-  PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-  GJS_DEBUG_TOPICS=JS ERROR;JS LOG
-  SESSION_MANAGER=local/kali:@/tmp/.ICE-unix/1109,unix/kali:/tmp/.ICE-unix/1109
-  _=./lb5
+      ###enviroment###
+      
+      LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:c$
+      XDG_MENU_PREFIX=gnome-
+      LANG=en_US.UTF-8
+      GDM_LANG=en_US.UTF-8
+      DISPLAY=:1
+      COLORTERM=truecolor
+      USERNAME=root
+      XDG_VTNR=2
+      SSH_AUTH_SOCK=/run/user/0/keyring/ssh
+      S_COLORS=auto
+      XDG_SESSION_ID=3
+      USER=root
+      DESKTOP_SESSION=gnome
+      GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/4f179ed8_45a7_4eb3_8742_484929$
+      PWD=/root/labs
+      HOME=/root
+      SSH_AGENT_PID=1204
+      QT_ACCESSIBILITY=1
+      XDG_SESSION_TYPE=x11
+      XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/
+      XDG_SESSION_DESKTOP=gnome
+      GJS_DEBUG_OUTPUT=stderr
+      TK_MODULES=gail:atk-bridge
+      WINDOWPATH=2
+      TERM=xterm-256color
+      SHELL=/bin/bash
+      VTE_VERSION=5200
+      XDG_CURRENT_DESKTOP=GNOME
+      GPG_AGENT_INFO=/run/user/0/gnupg/S.gpg-agent:0:1
+      GNOME_TERMINAL_SERVICE=:1.67
+      SHLVL=1
+      XDG_SEAT=seat0
+      GDMSESSION=gnome
+      GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+      LOGNAME=root
+      DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/bus
+      XDG_RUNTIME_DIR=/run/user/0
+      XAUTHORITY=/run/user/0/gdm/Xauthority
+      PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+      SESSION_MANAGER=local/kali:@/tmp/.ICE-unix/1109,unix/kali:/tmp/.ICE-unix/1109
+      _=./lb5
 
 Образ
 ^^^^^
 
 .. Расположение::
-::
-   docker run -it everricvlvm/lb5
+   ::
+      docker run -it everricvlvm/lb5
 
   
 ..	mkdir work
